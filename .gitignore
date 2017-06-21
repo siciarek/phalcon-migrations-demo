@@ -1,2 +1,7 @@
+/.idea
+/composer.json
+/composer.lock
+/demo
+/vendor
 /cache/
 /config/development/
