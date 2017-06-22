@@ -1,22 +1,29 @@
 #!/bin/bash +x
 
+export PTOOLSPATH=$PWD/vendor/phalcon/devtools
+
 SCRIPT=$(basename $0)
 PHALCON=$PWD/vendor/bin/phalcon.php
 PROJECT_CONFIG=$PWD/demo/app/config/config.php
 CREATE_DB=$(cat <<SQL
-    DROP DATABASE IF EXISTS demo;
-    CREATE DATABASE demo;
-    CREATE TABLE demo.user (
-        id INT AUTO_INCREMENT,
-        name VARCHAR(32),
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
-    CREATE TABLE demo.user_parameter (
-        id INT AUTO_INCREMENT,
-        name VARCHAR(32),
-        value VARCHAR(255),
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+DROP DATABASE IF EXISTS demo;
+
+CREATE DATABASE demo;
+
+CREATE TABLE demo.user (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(32),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE demo.user_parameter (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(32),
+    value VARCHAR(255),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
 SQL
 )
 
@@ -61,18 +68,42 @@ echo \$ phalcon migration --help
 
 pause
 
-echo ----------------------------------------------------------------------------------
-
 $PHALCON migration --help
 
-echo
-echo ----------------------------------------------------------------------------------
+pause
 
-writeln ' 1. Generowanie migracji - zapis do pliku .phalcon/migration-version'
+clear
+
+writeln ' 1. Generowanie migracji - zapis do pliku phalcon/migration-version'
 
 # ----------------------------------------------------------------------------------
 
-writeln '     1.1 Typowy sposób numeracji wersji (1.X.X)'
+writeln '     1.1 Typowy sposób numeracji wersji (1.X.X) ZMIANA W KODZIE.'
+
+echo \$ phalcon migration generate
+echo \$ phalcon migration run
+
+pause
+
+$PHALCON migration generate
+echo \$ ls -all app/migrations
+ls -all app/migrations
+
+pause
+
+
+$PHALCON migration run
+
+echo \$ ls -all app/migrations
+ls -all app/migrations
+
+echo \$ cat .phalcon/migration-version
+cat .phalcon/migration-version
+echo
+
+# ----------------------------------------------------------------------------------
+
+writeln '     1.2 Typowy sposób numeracji wersji (1.X.X) kolejna wersja.'
 
 echo \$ phalcon migration generate
 echo \$ phalcon migration run
@@ -91,26 +122,7 @@ echo
 
 # ----------------------------------------------------------------------------------
 
-writeln '     1.2 Typowy sposób numeracji wersji (1.X.X) kolejna wersja'
-
-echo \$ phalcon migration generate
-echo \$ phalcon migration run
-
-pause
-
-$PHALCON migration generate
-$PHALCON migration run
-
-echo \$ ls -all app/migrations
-ls -all app/migrations
-
-echo \$ cat .phalcon/migration-version
-cat .phalcon/migration-version
-echo
-
-# ----------------------------------------------------------------------------------
-
-writeln '     1.3 Typowy sposób numeracji wersji (1.X.X) kolejna wersja'
+writeln '     1.3 Typowy sposób numeracji wersji (1.X.X) kolejna wersja.'
 
 echo \$ phalcon migration generate
 echo \$ phalcon migration run

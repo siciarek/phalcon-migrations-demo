@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 
 function pause(){
@@ -9,13 +9,17 @@ function writeln() {
     echo -e "\n * $*\n"
 }
 
-rm -rvf vendor > /dev/null
-rm -rvf composer.* > /dev/null
-
 
 writeln 'Usunięcie aplikacji + instalacja "phalcon/devtools" '
 
-read -p ''
+echo '$ rm -rvf vendor > /dev/null'
+echo '$ rm -rvf composer.json composer.lock > /dev/null'
+echo '$ rm -rvf demo > /dev/null'
+echo '$ composer require phalcon/devtools 3.1.1'
 
+pause
 
+rm -rvf vendor > /dev/null
+rm -rvf composer.json composer.lock > /dev/null
+rm -rvf demo > /dev/null
 composer require phalcon/devtools 3.1.1
