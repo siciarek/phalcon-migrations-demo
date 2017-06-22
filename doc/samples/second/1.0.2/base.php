@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class UserMigration_101
+ * Class BaseMigration_102
  */
-class UserMigration_101 extends Migration
+class BaseMigration_102 extends Migration
 {
     /**
      * Run the migrations
@@ -18,12 +18,13 @@ class UserMigration_101 extends Migration
     public function up()
     {
         $sql =<<<SQL
-    CREATE TABLE user (
-        id INT AUTO_INCREMENT,
-        first_name VARCHAR(32) NOT NULL,
-        last_name VARCHAR(32) NOT NULL,
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+CREATE TABLE profile (
+    id INT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    description VARCHAR(255) NULL,
+    info TEXT,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 SQL;
 
         self::$_connection->execute($sql);
@@ -37,7 +38,7 @@ SQL;
     public function down()
     {
         $sql =<<<SQL
-DROP TABLE user
+DROP TABLE profile;
 SQL;
 
         self::$_connection->execute($sql);

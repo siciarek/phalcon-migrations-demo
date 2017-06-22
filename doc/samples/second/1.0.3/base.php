@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class UserMigration_103
+ * Class BaseMigration_103
  */
-class UserMigration_103 extends Migration
+class BaseMigration_103 extends Migration
 {
     /**
      * Run the migrations
